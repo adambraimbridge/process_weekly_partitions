@@ -1,0 +1,210 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="1/22/2018 1:51:54 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="FTSQL003-WVIR-D"
+  DTS:CreatorName="ADFT\mark.hornsby"
+  DTS:DTSID="{49C28F2C-C618-4965-BF1B-2FC834C2208F}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.4457.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package"
+  DTS:PackageType="5"
+  DTS:VersionBuild="7"
+  DTS:VersionGUID="{E0BAC685-0A34-4767-A031-F584D16FDAB7}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[FTSQL003-WVIR-D\DEEPERVIEW_TAB.DEEPVIEW_TAB]"
+      DTS:CreationName="MSOLAP100"
+      DTS:DTSID="{EE176475-F6AE-4BA5-90F3-FC0B18EAC56B}"
+      DTS:ObjectName="FTSQL003-WVIR-D\DEEPERVIEW_TAB.DEEPVIEW_TAB">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=FTSQL003-WVIR-D\DEEPERVIEW_TAB;Initial Catalog=DEEPVIEW_TAB;Provider=MSOLAP.7;Impersonation Level=Impersonate;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{D12E8020-4C07-4858-B24C-92306EBC350B}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="json">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\month"
+      DTS:CreationName="Microsoft.ExpressionTask"
+      DTS:Description="Expression Task"
+      DTS:DTSID="{0AD6A431-9D9C-462E-9682-216230028290}"
+      DTS:ExecutableType="Microsoft.ExpressionTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="month"
+      DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExpressionTask
+          Expression="@[User::json] =&quot;{&quot; + &quot;\&quot;&quot; +&quot;refresh&quot; +&quot;\&quot;&quot; +  &quot;: {&quot; +&#xA;    &quot;\&quot;&quot; + &quot;type&quot; +&quot;\&quot;&quot; +&quot; : &quot; + &quot;\&quot;&quot;  + &quot;full&quot;  +&quot;\&quot;&quot; +  &quot; ,&quot; +&#xA;   &quot;\&quot;&quot; + &quot;objects&quot; +&quot;\&quot;&quot; + &quot; : [&#xA;      {&quot; + &#xA;       &quot;\&quot;&quot;  +  &quot;database&quot; +&quot;\&quot;&quot; +&quot; :&quot; + &quot;\&quot;&quot; + &quot;DEEPVIEW_TAB&quot; +&quot;\&quot;&quot; +  &quot; ,&quot; +&#xA;        &quot;\&quot;&quot; + &quot;table&quot;+&quot;\&quot;&quot; + &quot; :&quot; +   &quot;\&quot;&quot; +&quot;Metrics&quot; +&quot;\&quot;&quot; + &quot;,&quot; +&#xA;        &quot;\&quot;&quot; + &quot;partition&quot; +&quot;\&quot;&quot; + &quot;: &quot; +&quot;\&quot;&quot; + &quot;month&quot; +(DT_WSTR,1)month(getdate()) + &quot;_&quot; + (DT_WSTR,4)year(getdate()) + &quot;\&quot;&quot;  + &quot;&#xA;      }&#xA;    ]&#xA;  }&#xA;}&quot;" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\process cube"
+      DTS:CreationName="Microsoft.ASExecuteDDLTask"
+      DTS:Description="Analysis Services Execute DDL Task"
+      DTS:DTSID="{E5CE67CA-F671-4151-970B-A24A53D20741}"
+      DTS:ExecutableType="Microsoft.ASExecuteDDLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="process cube"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ASDdlData
+          ConnectionName="FTSQL003-WVIR-D\DEEPERVIEW_TAB.DEEPVIEW_TAB"
+          SourceType="Variable"
+          Source="User::json" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\process dimensions"
+      DTS:CreationName="Microsoft.ASExecuteDDLTask"
+      DTS:Description="Analysis Services Execute DDL Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{8f3dac3f-c69a-4d56-80f1-e79319244b87}"
+      DTS:ExecutableType="Microsoft.ASExecuteDDLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="process dimensions"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ASDdlData
+          ConnectionName="FTSQL003-WVIR-D\DEEPERVIEW_TAB.DEEPVIEW_TAB"
+          SourceType="DirectInput"
+          Source="{&#xA;  &quot;refresh&quot;: {&#xA;    &quot;type&quot;: &quot;dataOnly&quot;,&#xA;    &quot;objects&quot;: [&#xA;      {&#xA;        &quot;database&quot;: &quot;DEEPVIEW_TAB&quot;,&#xA;        &quot;table&quot;: &quot;AdUnit&quot;&#xA;      },&#xA;      {&#xA;        &quot;database&quot;: &quot;DEEPVIEW_TAB&quot;,&#xA;        &quot;table&quot;: &quot;Advertisers&quot;&#xA;      },&#xA;      {&#xA;        &quot;database&quot;: &quot;DEEPVIEW_TAB&quot;,&#xA;        &quot;table&quot;: &quot;Categories&quot;&#xA;      },&#xA;      {&#xA;        &quot;database&quot;: &quot;DEEPVIEW_TAB&quot;,&#xA;        &quot;table&quot;: &quot;Region&quot;&#xA;      },&#xA;      {&#xA;        &quot;database&quot;: &quot;DEEPVIEW_TAB&quot;,&#xA;        &quot;table&quot;: &quot;Event_Demographics&quot;&#xA;      },&#xA;      {&#xA;        &quot;database&quot;: &quot;DEEPVIEW_TAB&quot;,&#xA;        &quot;table&quot;: &quot;Time_of_Day&quot;&#xA;      },&#xA;      {&#xA;        &quot;database&quot;: &quot;DEEPVIEW_TAB&quot;,&#xA;        &quot;table&quot;: &quot;Dates&quot;&#xA;      },&#xA;      {&#xA;        &quot;database&quot;: &quot;DEEPVIEW_TAB&quot;,&#xA;        &quot;table&quot;: &quot;DailyCounts&quot;&#xA;      },&#xA;      {&#xA;        &quot;database&quot;: &quot;DEEPVIEW_TAB&quot;,&#xA;        &quot;table&quot;: &quot;Users_Impressions&quot;&#xA;      },&#xA;      {&#xA;        &quot;database&quot;: &quot;DEEPVIEW_TAB&quot;,&#xA;        &quot;table&quot;: &quot;Creatives&quot;&#xA;      },&#xA;      {&#xA;        &quot;database&quot;: &quot;DEEPVIEW_TAB&quot;,&#xA;        &quot;table&quot;: &quot;Ad_Position&quot;&#xA;      },&#xA;      {&#xA;        &quot;database&quot;: &quot;DEEPVIEW_TAB&quot;,&#xA;        &quot;table&quot;: &quot;Page_Type&quot;&#xA;      },&#xA;      {&#xA;        &quot;database&quot;: &quot;DEEPVIEW_TAB&quot;,&#xA;        &quot;table&quot;: &quot;Res&quot;&#xA;      },&#xA;      {&#xA;        &quot;database&quot;: &quot;DEEPVIEW_TAB&quot;,&#xA;        &quot;table&quot;: &quot;SLV&quot;&#xA;      },&#xA;      {&#xA;        &quot;database&quot;: &quot;DEEPVIEW_TAB&quot;,&#xA;        &quot;table&quot;: &quot;DT_Industry&quot;&#xA;      },&#xA;      {&#xA;        &quot;database&quot;: &quot;DEEPVIEW_TAB&quot;,&#xA;        &quot;table&quot;: &quot;Users Clicks&quot;&#xA;      },&#xA;      {&#xA;        &quot;database&quot;: &quot;DEEPVIEW_TAB&quot;,&#xA;        &quot;table&quot;: &quot;DT_position&quot;&#xA;      },&#xA;      {&#xA;        &quot;database&quot;: &quot;DEEPVIEW_TAB&quot;,&#xA;        &quot;table&quot;: &quot;DT_responsibility&quot;&#xA;      },&#xA;      {&#xA;        &quot;database&quot;: &quot;DEEPVIEW_TAB&quot;,&#xA;        &quot;table&quot;: &quot;demographic_seg_new&quot;&#xA;      },&#xA;      {&#xA;        &quot;database&quot;: &quot;DEEPVIEW_TAB&quot;,&#xA;        &quot;table&quot;: &quot;manytomany_new&quot;&#xA;      },&#xA;      {&#xA;        &quot;database&quot;: &quot;DEEPVIEW_TAB&quot;,&#xA;        &quot;table&quot;: &quot;Segment_name_DT&quot;&#xA;      },&#xA;      {&#xA;        &quot;database&quot;: &quot;DEEPVIEW_TAB&quot;,&#xA;        &quot;table&quot;: &quot;gender&quot;&#xA;      },&#xA;      {&#xA;        &quot;database&quot;: &quot;DEEPVIEW_TAB&quot;,&#xA;        &quot;table&quot;: &quot;spoor&quot;&#xA;      },&#xA;      {&#xA;        &quot;database&quot;: &quot;DEEPVIEW_TAB&quot;,&#xA;        &quot;table&quot;: &quot;krux_mtom&quot;&#xA;      },&#xA;      {&#xA;        &quot;database&quot;: &quot;DEEPVIEW_TAB&quot;,&#xA;        &quot;table&quot;: &quot;krux_Segment&quot;&#xA;      },&#xA;      {&#xA;        &quot;database&quot;: &quot;DEEPVIEW_TAB&quot;,&#xA;        &quot;table&quot;: &quot;dim_krux&quot;&#xA;      },&#xA;      {&#xA;        &quot;database&quot;: &quot;DEEPVIEW_TAB&quot;,&#xA;        &quot;table&quot;: &quot;many_to_many_krux&quot;&#xA;      },&#xA;      {&#xA;        &quot;database&quot;: &quot;DEEPVIEW_TAB&quot;,&#xA;        &quot;table&quot;: &quot;krux_segment_krux_only&quot;&#xA;      },&#xA;      {&#xA;        &quot;database&quot;: &quot;DEEPVIEW_TAB&quot;,&#xA;        &quot;table&quot;: &quot;buy_type&quot;&#xA;      },&#xA;      {&#xA;        &quot;database&quot;: &quot;DEEPVIEW_TAB&quot;,&#xA;        &quot;table&quot;: &quot;admant_category&quot;&#xA;      },&#xA;      {&#xA;        &quot;database&quot;: &quot;DEEPVIEW_TAB&quot;,&#xA;        &quot;table&quot;: &quot;admantx_admant&quot;&#xA;      },&#xA;      {&#xA;        &quot;database&quot;: &quot;DEEPVIEW_TAB&quot;,&#xA;        &quot;table&quot;: &quot;dim_articles&quot;&#xA;      },&#xA;      {&#xA;        &quot;database&quot;: &quot;DEEPVIEW_TAB&quot;,&#xA;        &quot;table&quot;: &quot;Dim_Admantx_Admant&quot;&#xA;      },&#xA;      {&#xA;        &quot;database&quot;: &quot;DEEPVIEW_TAB&quot;,&#xA;        &quot;table&quot;: &quot;Dim_admantx_Categories&quot;&#xA;      },&#xA;      {&#xA;        &quot;database&quot;: &quot;DEEPVIEW_TAB&quot;,&#xA;        &quot;table&quot;: &quot;dim_category_reference&quot;&#xA;      },&#xA;      {&#xA;        &quot;database&quot;: &quot;DEEPVIEW_TAB&quot;,&#xA;        &quot;table&quot;: &quot;dim_admant_reference&quot;&#xA;      },&#xA;      {&#xA;        &quot;database&quot;: &quot;DEEPVIEW_TAB&quot;,&#xA;        &quot;table&quot;: &quot;User_Demographics&quot;&#xA;      },&#xA;      {&#xA;        &quot;database&quot;: &quot;DEEPVIEW_TAB&quot;,&#xA;        &quot;table&quot;: &quot;campaigns&quot;&#xA;      }&#xA;    ]&#xA;  }&#xA;}" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\week"
+      DTS:CreationName="Microsoft.ExpressionTask"
+      DTS:Description="Expression Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{363251D3-25BC-48B8-AD21-8F2153B8FB42}"
+      DTS:ExecutableType="Microsoft.ExpressionTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="week"
+      DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExpressionTask
+          Expression="&quot;\&quot;&quot; + &quot;week&quot; +(DT_WSTR,1)datepart(&quot;ww&quot;,getdate()) + &quot;\&quot;&quot;" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{18CED292-5D45-4E30-97B6-E22D0DA196D1}"
+      DTS:From="Package\month"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\process cube" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{DAAAEF6A-CCF2-4C52-8F68-E40038CA737F}"
+      DTS:From="Package\process dimensions"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\month" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="140,42"
+          Id="Package\process cube"
+          TopLeft="491,420" />
+        <NodeLayout
+          Size="109,42"
+          Id="Package\month"
+          TopLeft="507,289" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="561.25,331">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,89"
+              Start="0,0"
+              End="0,81.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,81.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="103,42"
+          Id="Package\week"
+          TopLeft="1040,127" />
+        <NodeLayout
+          Size="170,42"
+          Id="Package\process dimensions"
+          TopLeft="478,166" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="562.25,208">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,81"
+              Start="0,0"
+              End="0,73.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,73.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <ConnectionManager
+    design-time-name="Package.ConnectionManagers[FTSQL003-WVIR-D\DEEPERVIEW_TAB.DEEPVIEW_TAB]">
+    <ProjectReferenceName></ProjectReferenceName>
+  </ConnectionManager>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
