@@ -1,0 +1,13 @@
+deployment:
+  staging:
+    branch: master
+    codedeploy:
+      deeperview:
+        application_root: /
+        region: eu-west-1 
+        revision_location:
+          revision_type: S3
+          s3_location:
+            bucket: dev.ft.dw.load.mohammed.test
+            key_pattern: deeperview-{BRANCH}-{SHORT_COMMIT}
+        deployment_group: circleci-deployment-group
