@@ -1,9 +1,6 @@
 version: 0.0
 os: windows
-files:
-  - source: \*
-    destination: D:\build_depoy
 hooks:
-  BeforeInstall:
-    - location: \before-install.bat
+  AfterInstall:
+    - location: scripts\install_ssis.ps1
       timeout: 900
