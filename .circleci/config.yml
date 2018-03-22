@@ -1,22 +1,16 @@
-on: 2
+version: 2
 jobs:
   build:
+    working_directory: ~/workspace
     machine: true
     steps:
       - checkout
       - run:
           name: Greeting
           command: echo Hello, world.
-  deployment:
-    staging:
-      branch: master
-      codedeploy:
-        deeperview:
-          application_root: /
-          region: eu-west-1
-          revision_location:
-            revision_type: S3
-            s3_location:
-              bucket: dev.ft.dw.load.mohammed.test
-              key_pattern: deeperview-{BRANCH}-{SHORT_COMMIT}
-          deployment_group: circleci-deployment-group
+      -run:
+          name: Install tools
+          command: 
+      - run:
+          name: Deploy to S3 if tests pass and branch is Master
+          command: aws s3 sync ~/workspace s3://dev.ft.dw.load.mohammed.test --delete
