@@ -10,4 +10,4 @@ jobs:
           command: echo Hello, world.
       - run:
           name: Push to S3
-          command: aws push --application-name deeperview --s3-location s3://dev.ft.dw.load.mohammed.test/deeperview.zip --source ~/workspace
+          command: aws deploy push --application-name deeperview --s3-location s3://dev.ft.dw.load.mohammed.test/deeperview.zip --source ~/workspace
