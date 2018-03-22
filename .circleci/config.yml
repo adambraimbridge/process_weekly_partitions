@@ -8,7 +8,7 @@ jobs:
       - run:
           name: Greeting
           command: echo Hello, world.
-      -run:
+      - run:
           name: Configure aws
           command: aws configure set default.region eu-west-1
       - run:
