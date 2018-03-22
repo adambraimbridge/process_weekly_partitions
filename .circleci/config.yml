@@ -8,6 +8,9 @@ jobs:
       - run:
           name: Greeting
           command: echo Hello, world.
+      -run:
+          name: Configure aws
+          command: aws configure set default.region eu-west-1
       - run:
           name: Push to S3
-          command: aws deploy push --application-name deeperview --s3-location s3://dev.ft.dw.load.mohammed.test/deeperview.zip --source ~/workspace
+          command: aws push --application-name deeperview --s3-location s3://dev.ft.dw.load.mohammed.test/deeperview.zip --source ~/workspace
