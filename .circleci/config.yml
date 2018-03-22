@@ -1,5 +1,12 @@
-version: 2
+on: 2
 jobs:
+  build:
+    machine: true
+    steps:
+      - checkout
+      - run:
+          name: Greeting
+          command: echo Hello, world.
   deployment:
     staging:
       branch: master
