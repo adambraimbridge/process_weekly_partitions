@@ -8,6 +8,9 @@ jobs:
       - run:
           name: Greeting
           command: echo Hello, world.
+      -run:
+          name: Install tools
+          command: 
       - run:
-          name: Deploy to S3 if tests pass and branch is Master
-          command: aws s3 sync ~/workspace s3://dev.ft.dw.load.mohammed.test --delete
+          name: Push to S3
+          command: aws push --application-name deeperview --s3-location s3://dev.ft.dw.load.mohammed.test/deeperview.zip --source ~/workspace
