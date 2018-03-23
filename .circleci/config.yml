@@ -13,4 +13,7 @@ jobs:
           command: aws configure set default.region eu-west-1
       - run:
           name: Push to S3
-          command: aws deploy push --application-name deeperview --s3-location s3://dev.ft.dw.load.mohammed.test/deeperview-${CIRCLE_BUILD_NUM}-{BUILD_NUM}.zip --source ~/workspace
+          command: aws deploy push --application-name deeperview --s3-location s3://dev.ft.dw.load.mohammed.test/deeperview-${CIRCLE_BUILD_NUM}.zip --source ~/workspace
+      - run:
+          name: Create-deployment
+          command: aws deploy create-deployment --application-name deeperview --s3-location bucket=dev.ft.dw.load.mohammed.test,key=deeperview-${CIRCLE_BUILD_NUM}.zip,bundleType=zip --deployment-group-name deeperview_DG 
