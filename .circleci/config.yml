@@ -7,7 +7,7 @@ jobs:
       - checkout
       - run:
           name: Install dependency
-          command: apt-get update && apt-get install jq
+          command: sudo apt-get update && sudo apt-get install jq
       - run:
           name: Configure aws
           command: aws configure set default.region eu-west-1
