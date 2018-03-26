@@ -1,17 +1,15 @@
-
-
 #Get config file for deployment
 $MyDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 
-[xml]$ConfigFile = Get-Content "$MyDirSettings.xml"
+[xml]$ConfigFile = Get-Content "$MyDir\settings.xml"
 
 #region script configuration
 
-If ($env:DEPLOYMENT_GROUP_NAME == "prod") {
-	$Settings = $ConfigFile.settings.prod
+If ($env:DEPLOYMENT_GROUP_NAME.Equals("prod")) {
+        $Settings = $ConfigFile.settings.prod
 }
 Else{
-	$Settings = $ConfigFile.settings.dev
+        $Settings = $ConfigFile.settings.dev
 }
 
 ##Set Variables
@@ -35,9 +33,9 @@ $arg1 = “/Silent”
 $arg2 = “/SourcePath:””$ProjectFilePath”””
 $arg3 = “/DestinationServer:””$SsisServer”””
 $arg4 = “/DestinationPath:””$DestinationPath”””
-$arg5 = “/ProjectPassword:””$ProjectFilePassword”””
+#$arg5 = “/ProjectPassword:””$ProjectFilePassword”””
 
-#Write-Host $cmd $arg1 $arg2 $arg3 $arg4 $arg5
-& $cmd $arg1 $arg2 $arg3 $arg4 $arg5
+#Write-Host $cmd $arg1 $arg2 $arg3 $arg4
+& $cmd $arg1 $arg2 $arg3 $arg4
 
 #endregion
