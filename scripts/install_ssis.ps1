@@ -34,8 +34,12 @@ $arg2 = "/SourcePath:""$ProjectFilePath"""
 $arg3 = "/DestinationServer:""$SsisServer"""
 $arg4 = "/DestinationPath:""$DestinationPath"""
 #$arg5 = "/ProjectPassword:""$ProjectFilePassword"""
-
-#Write-Host $cmd $arg1 $arg2 $arg3 $arg4
-& $cmd $arg1 $arg2 $arg3 $arg4
+Try
+{
+  #Write-Host $cmd $arg1 $arg2 $arg3 $arg4
+  & $cmd $arg1 $arg2 $arg3 $arg4
+}Catch{
+exit 255
+}
 
 #endregion
