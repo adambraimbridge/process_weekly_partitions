@@ -19,21 +19,21 @@ $ProjectFileName = $Settings.ProjectFileName
 $FolderName = $Settings.FolderName
 $ProjectName = $Settings.ProjectName
 
-$ISDeploymentWizard = “C:\Program Files (x86)\Microsoft SQL Server\120\DTS\Binn\ISDeploymentWizard.exe”
+$ISDeploymentWizard = "C:\Program Files (x86)\Microsoft SQL Server\120\DTS\Binn\ISDeploymentWizard.exe"
 
 
 #region project deployment
 
 # Create command line arguments
-$DestinationPath = “/SSISDB/” + $FolderName + “/” + $ProjectName
-$ProjectFilePath = $PSScriptRoot + “\..\process_weekly_partitions/bin/Development” + $ProjectFileName
+$DestinationPath = "/SSISDB/" + $FolderName + "/" + $ProjectName
+$ProjectFilePath = $PSScriptRoot + "\..\process_weekly_partitions/bin/Development" + $ProjectFileName
 
 $cmd = $ISDeploymentWizard
-$arg1 = “/Silent”
-$arg2 = “/SourcePath:””$ProjectFilePath”””
-$arg3 = “/DestinationServer:””$SsisServer”””
-$arg4 = “/DestinationPath:””$DestinationPath”””
-#$arg5 = “/ProjectPassword:””$ProjectFilePassword”””
+$arg1 = "/Silent"
+$arg2 = "/SourcePath:""$ProjectFilePath"""
+$arg3 = "/DestinationServer:""$SsisServer"""
+$arg4 = "/DestinationPath:""$DestinationPath"""
+#$arg5 = "/ProjectPassword:""$ProjectFilePassword"""
 
 #Write-Host $cmd $arg1 $arg2 $arg3 $arg4
 & $cmd $arg1 $arg2 $arg3 $arg4
