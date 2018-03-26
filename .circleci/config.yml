@@ -16,7 +16,9 @@ jobs:
           command: aws deploy push --application-name deeperview --s3-location s3://artefacts.ft-konpolicygenerator/codedeploy_test/deeperview-${CIRCLE_BUILD_NUM}.zip --source ~/workspace
       - run:
           name: Create-deployment
-          command: deployment_id_json=`aws deploy create-deployment --application-name deeperview --s3-location bucket=artefacts.ft-konpolicygenerator,key=codedeploy_test/deeperview-${CIRCLE_BUILD_NUM}.zip,bundleType=zip --deployment-group-name deeperview_DG`
+          command: | 
+            deployment_id_json=`aws deploy create-deployment --application-name deeperview --s3-location bucket=artefacts.ft-konpolicygenerator,key=codedeploy_test/deeperview-${CIRCLE_BUILD_NUM}.zip,bundleType=zip --deployment-group-name deeperview_DG`
+            echo "json is:${deployment_id_json}"
       - run:
           name: extract deployment id
           command: |
