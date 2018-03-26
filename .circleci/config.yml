@@ -20,7 +20,7 @@ jobs:
       - run:
           name: extract deployment id
           command: |
-            echo "json is $deployment_id_json
+            echo "json is $deployment_id_json"
             deployment_id=`echo $deployment_id_json| jq ".deploymentId"`
             echo $deployment_id
       - run:
