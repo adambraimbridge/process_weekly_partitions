@@ -20,6 +20,6 @@ jobs:
       - run:
           name: extract deployment id
           command: deployment_id=`echo $deployment_id_json| jq ".deploymentId"`
-      -run:
+      - run:
           name: Get deployment status
           command: aws deploy get-deployment --deployment-id $deployment_id
