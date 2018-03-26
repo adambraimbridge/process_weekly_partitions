@@ -19,5 +19,5 @@ jobs:
           command: |
             deployment_id_json=`aws deploy create-deployment --application-name deeperview --s3-location bucket=artefacts.ft-konpolicygenerator,key=codedeploy_test/deeperview-${CIRCLE_BUILD_NUM}.zip,bundleType=zip --deployment-group-name deeperview_DG`
             echo "json is ${deployment_id_json}"
-            deployment_id=`echo ${deployment_id_json}| jq ".deploymentId"`
+            deployment_id=`echo ${deployment_id_json}| jq --raw-output ".deploymentId"`
             aws deploy get-deployment --deployment-id ${deployment_id}          
