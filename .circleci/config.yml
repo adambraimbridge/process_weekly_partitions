@@ -24,8 +24,7 @@ jobs:
 
             if [ "${deployment_status}" == "Created" ]
             then
-               echo "In here"
-               while [[ "${deployment_status}" == "Created" ] || [ "${deployment_status}" == "InProgress" ]]
+               while [ [ "${deployment_status}" == "Created" ] || [ "${deployment_status}" == "InProgress" ] ]
                do
                   echo "Deployment in progress Waiting for 5S"
                   sleep 5
