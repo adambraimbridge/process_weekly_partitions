@@ -37,7 +37,7 @@ jobs:
                echo "Deployment Succeeded"
                exit 0
             else
-               echo "### deployment state is :${deployment_status}""
+               echo "### deployment state is :${deployment_status}"
                exit 1
 
             fi
