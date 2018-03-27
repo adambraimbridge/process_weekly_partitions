@@ -23,7 +23,7 @@ jobs:
             deployment_status=`aws deploy get-deployment --deployment-id ${deployment_id}|jq --raw-output ".deploymentInfo.status"`
             if [ ${deployment_status} == 'Created' ]
             then
-               while [ ${deployment_status} == 'Created' || ${deployment_status} == 'InProgress']
+               while [ ${deployment_status} == 'Created' || ${deployment_status} == 'InProgress' ]
                do
                   echo "Deployment in progress Waiting for 5S"
                   sleep 5
