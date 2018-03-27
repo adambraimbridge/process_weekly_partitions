@@ -24,6 +24,7 @@ jobs:
 
             if [ "${deployment_status}" == "Created" ]
             then
+               echo "##status is: ${deployment_status}"
                while [ [ "${deployment_status}" == "Created" ] || [ "${deployment_status}" == "InProgress" ] ]
                do
                   echo "Deployment in progress Waiting for 5S"
