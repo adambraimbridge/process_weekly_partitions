@@ -21,10 +21,11 @@ jobs:
             echo "${deployment_id_json}"
             deployment_id=`echo ${deployment_id_json}| jq --raw-output ".deploymentId"`
             deployment_status=`aws deploy get-deployment --deployment-id ${deployment_id}|jq --raw-output ".deploymentInfo.status"`
-            if [ "${deployment_status}" = "Created" ]
+
+            if [ "${deployment_status}" == "Created" ]
             then
                echo "In here"
-               while [[ "${deployment_status}" = "Created" ] || [ "${deployment_status}" = "InProgress" ]]
+               while [[ "${deployment_status}" == "Created" ] || [ "${deployment_status}" == "InProgress" ]]
                do
                   echo "Deployment in progress Waiting for 5S"
                   sleep 5
@@ -33,7 +34,7 @@ jobs:
                done
             fi
             
-            if [ "${deployment_status}" = "Succeeded" ]
+            if [ "${deployment_status}" == "Succeeded" ]
             then
                echo "Deployment Succeeded"
                exit 0
