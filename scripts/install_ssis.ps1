@@ -29,7 +29,7 @@ $ISDeploymentWizard = "C:\Program Files (x86)\Microsoft SQL Server\130\DTS\Binn\
 
 # Create command line arguments
 $DestinationPath = "/SSISDB/" + $FolderName + "/" + $ProjectName
-$ProjectFilePath = $PSScriptRoot + "\..\process_weekly_partitions/bin/Development" + $ProjectFileName
+$ProjectFilePath = $PSScriptRoot + "\..\process_weekly_partitions\bin\Development\" + $ProjectFileName
 
 $cmd = $ISDeploymentWizard
 $arg1 = "/Silent"
