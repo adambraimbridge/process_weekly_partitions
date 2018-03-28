@@ -22,7 +22,7 @@ $ProjectFileName = $Settings.ProjectFileName
 $FolderName = $Settings.FolderName
 $ProjectName = $Settings.ProjectName
 
-$ISDeploymentWizard = "C:\Program Files (x86)\Microsoft SQL Server\120\DTS\Binn\ISDeploymentWizard.exe"
+$ISDeploymentWizard = "C:\Program Files (x86)\Microsoft SQL Server\130\DTS\Binn\ISDeploymentWizard.exe"
 
 
 #region project deployment
