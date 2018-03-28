@@ -6,7 +6,7 @@ $MyDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 #region script configuration
 Try
 {
-If ($env:DEPLOYMENT_GROUP_NAME.Equals("deeperview_stage_DG")) {
+If (("deeperview_stage_DG").Equals($env:DEPLOYMENT_GROUP_NAME)) {
         Write-Host "Dev config picked up for deployment"
         $Settings = $ConfigFile.settings.dev
 }
