@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="7"
-  DTS:VersionGUID="{E0BAC685-0A34-4767-A031-F584D16FDAB7}">
+  DTS:VersionBuild="9"
+  DTS:VersionGUID="{E65D7788-264A-45FB-92DB-7C705B2D2B7C}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -49,7 +49,7 @@
       DTS:LocaleID="-1"
       DTS:ObjectName="month"
       DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="0">
+      DTS:ThreadHint="1">
       <DTS:Variables />
       <DTS:ObjectData>
         <ExpressionTask
@@ -64,7 +64,7 @@
       DTS:ExecutableType="Microsoft.ASExecuteDDLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="process cube"
-      DTS:ThreadHint="0">
+      DTS:ThreadHint="1">
       <DTS:Variables />
       <DTS:ObjectData>
         <ASDdlData
@@ -77,12 +77,11 @@
       DTS:refId="Package\process dimensions"
       DTS:CreationName="Microsoft.ASExecuteDDLTask"
       DTS:Description="Analysis Services Execute DDL Task"
-      DTS:Disabled="True"
       DTS:DTSID="{8f3dac3f-c69a-4d56-80f1-e79319244b87}"
       DTS:ExecutableType="Microsoft.ASExecuteDDLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="process dimensions"
-      DTS:ThreadHint="0">
+      DTS:ThreadHint="1">
       <DTS:Variables />
       <DTS:ObjectData>
         <ASDdlData
@@ -101,7 +100,7 @@
       DTS:LocaleID="-1"
       DTS:ObjectName="week"
       DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="1">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <ExpressionTask
@@ -140,13 +139,21 @@
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
+          Size="109,42"
+          Id="Package\month"
+          TopLeft="507,289" />
+        <NodeLayout
           Size="140,42"
           Id="Package\process cube"
           TopLeft="491,420" />
         <NodeLayout
-          Size="109,42"
-          Id="Package\month"
-          TopLeft="507,289" />
+          Size="170,42"
+          Id="Package\process dimensions"
+          TopLeft="478,166" />
+        <NodeLayout
+          Size="103,42"
+          Id="Package\week"
+          TopLeft="1040,127" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
           TopLeft="561.25,331">
@@ -169,14 +176,6 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="103,42"
-          Id="Package\week"
-          TopLeft="1040,127" />
-        <NodeLayout
-          Size="170,42"
-          Id="Package\process dimensions"
-          TopLeft="478,166" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
           TopLeft="562.25,208">
