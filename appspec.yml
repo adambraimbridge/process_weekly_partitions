@@ -1,0 +1,7 @@
+version: 0.0
+os: windows
+hooks:
+  AfterInstall:
+    - location: scripts\install_ssis.ps1
+      runas: administrator
+      timeout: 900

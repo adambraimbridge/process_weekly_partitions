@@ -1,0 +1,45 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/workspace
+    machine: true
+    steps:
+      - checkout
+      - run:
+          name: Install dependency
+          command: sudo apt-get update && sudo apt-get install jq
+      - run:
+          name: Configure aws
+          command: aws configure set default.region eu-west-1
+      - run:
+          name: Push to S3
+          command: aws deploy push --application-name deeperview --s3-location s3://ft-codedeploy/deeperview-${CIRCLE_BUILD_NUM}.zip --source ~/workspace
+      - run:
+          name: Create and check deployment
+          command: |
+            deployment_id_json=`aws deploy create-deployment --application-name deeperview --s3-location bucket=ft-codedeploy,key=deeperview-${CIRCLE_BUILD_NUM}.zip,bundleType=zip --deployment-group-name deeperview_stage_DG`
+            echo "${deployment_id_json}"
+            deployment_id=`echo ${deployment_id_json}| jq --raw-output ".deploymentId"`
+            deployment_status=`aws deploy get-deployment --deployment-id ${deployment_id}|jq --raw-output ".deploymentInfo.status"`
+
+            if [ "${deployment_status}" == "Created" ]
+            then
+               echo "##status is: ${deployment_status}"
+               while [[ "${deployment_status}" == "Created" || "${deployment_status}" == "InProgress" ]]
+               do
+                  echo "Deployment in progress Waiting for 5S"
+                  sleep 5
+                  deployment_status=`aws deploy get-deployment --deployment-id ${deployment_id}|jq --raw-output ".deploymentInfo.status"`
+
+               done
+            fi
+            
+            if [ "${deployment_status}" == "Succeeded" ]
+            then
+               echo "Deployment Succeeded"
+               exit 0
+            else
+               echo "### deployment state is :${deployment_status}"
+               exit 1
+
+            fi

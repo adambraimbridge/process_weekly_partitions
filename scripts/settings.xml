@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<settings>
+	<dev>
+		<ProjectName>process_weekly_partitions</ProjectName>
+		<ProjectFileName>process_weekly_partitions.ispac</ProjectFileName>
+		<FolderName>DeeperviewTab</FolderName>
+		<DestinationServer>FTSQL003-WVIR-D\DEEPERVIEW_TAB</DestinationServer>
+	</dev>
+	<prod>
+		<ProjectName>process_weekly_partitions</ProjectName>
+		<ProjectFileName>process_weekly_partitions.ispac</ProjectFileName>
+		<FolderName>DeeperviewTab</FolderName>
+		<DestinationServer>FTSQL003-WVIR-D\DEEPERVIEW_TAB</DestinationServer>
+	</prod>
+</settings>
