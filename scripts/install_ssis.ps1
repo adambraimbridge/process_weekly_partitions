@@ -44,6 +44,11 @@ $arg4 = "/DestinationPath:""$DestinationPath"""
 }Catch [Exception]{
 Write-Host $_.Exception|format-list -force
 exit 255
+}Catch {
+Write-Host "Exception occured"
+Write-Host $_.Exception|format-list -force
+exit 255
 }
+
 
 #endregion
