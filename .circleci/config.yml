@@ -13,11 +13,11 @@ jobs:
           command: aws configure set default.region eu-west-1
       - run:
           name: Push to S3
-          command: aws deploy push --application-name deeperview --s3-location s3://artefacts.ft-konpolicygenerator/codedeploy_test/deeperview-${CIRCLE_BUILD_NUM}.zip --source ~/workspace
+          command: aws deploy push --application-name deeperview --s3-location s3://ft-codedeploy/deeperview-${CIRCLE_BUILD_NUM}.zip --source ~/workspace
       - run:
           name: Create and check deployment
           command: |
-            deployment_id_json=`aws deploy create-deployment --application-name deeperview --s3-location bucket=artefacts.ft-konpolicygenerator,key=codedeploy_test/deeperview-${CIRCLE_BUILD_NUM}.zip,bundleType=zip --deployment-group-name deeperview_DG`
+            deployment_id_json=`aws deploy create-deployment --application-name deeperview --s3-location bucket=ft-codedeploy,key=deeperview-${CIRCLE_BUILD_NUM}.zip,bundleType=zip --deployment-group-name deeperview_stage_DG`
             echo "${deployment_id_json}"
             deployment_id=`echo ${deployment_id_json}| jq --raw-output ".deploymentId"`
             deployment_status=`aws deploy get-deployment --deployment-id ${deployment_id}|jq --raw-output ".deploymentInfo.status"`

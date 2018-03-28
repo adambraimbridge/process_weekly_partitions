@@ -4,12 +4,15 @@ $MyDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 [xml]$ConfigFile = Get-Content "$MyDir\settings.xml"
 
 #region script configuration
-
-If ($env:DEPLOYMENT_GROUP_NAME.Equals("prod")) {
-        $Settings = $ConfigFile.settings.prod
+Try
+{
+If ($env:DEPLOYMENT_GROUP_NAME.Equals("deeperview_stage_DG")) {
+        Write-Host "Dev config picked up for deployment"
+        $Settings = $ConfigFile.settings.dev
 }
 Else{
-        $Settings = $ConfigFile.settings.dev
+        Write-Host "Prod config picked up for deployment"
+        $Settings = $ConfigFile.settings.prod
 }
 
 ##Set Variables
@@ -34,11 +37,12 @@ $arg2 = "/SourcePath:""$ProjectFilePath"""
 $arg3 = "/DestinationServer:""$SsisServer"""
 $arg4 = "/DestinationPath:""$DestinationPath"""
 #$arg5 = "/ProjectPassword:""$ProjectFilePassword"""
-Try
-{
-  #Write-Host $cmd $arg1 $arg2 $arg3 $arg4
-  & $cmd $arg1 $arg2 $arg3 $arg4
-}Catch{
+
+#Write-Host $cmd $arg1 $arg2 $arg3 $arg4
+
+& $cmd $arg1 $arg2 $arg3 $arg4
+}Catch [Exception]{
+Write-Host $_.Exception|format-list -force
 exit 255
 }
 
