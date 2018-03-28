@@ -2,7 +2,7 @@
 $MyDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 
 [xml]$ConfigFile = Get-Content "$MyDir\settings.xml"
-
+whoami | Write-Host
 #region script configuration
 Try
 {
